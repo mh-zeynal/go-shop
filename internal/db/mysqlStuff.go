@@ -9,10 +9,12 @@ import (
 
 var db *gorm.DB
 
+//checks if db is initialized
 func IsConnectionStablished() bool {
 	return db != nil
 }
 
+//establishes new connection to our mysql database
 func MakeDatabase(user string, pass string, dbname string)  {
 	dsn := user + ":" + pass + "@/" + dbname
 	var err error
@@ -22,12 +24,14 @@ func MakeDatabase(user string, pass string, dbname string)  {
 	}
 }
 
+//queries all available products inside the database
 func GetAllProducts() types.InStock {
 	temp := make([]types.Product, 4)
 	db.Find(&temp)
 	return types.InStock{AllProducts: temp}
 }
 
+//queries the products that user has just selected
 func GetProducts(ids []int) *[]types.Product {
 	selects := make([]types.Product, 0)
 	for _, id := range ids{

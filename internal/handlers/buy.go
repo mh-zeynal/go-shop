@@ -10,6 +10,7 @@ import (
 	"shoppingServer/internal/types"
 )
 
+//sends all available products in form of json as our response
 func ShowGoods(c echo.Context) error {
 	if !db.IsConnectionStablished() {
 		db.MakeDatabase("root", "m@96@s97", "gamedatabase")
@@ -17,6 +18,7 @@ func ShowGoods(c echo.Context) error {
 	return c.JSON(http.StatusOK, db.GetAllProducts())
 }
 
+//sends all selected products and final payable price in form of json as our response
 func ReceiveSelectedGoods(c echo.Context) error {
 	if !db.IsConnectionStablished() {
 		db.MakeDatabase("root", "m@96@s97", "gamedatabase")
